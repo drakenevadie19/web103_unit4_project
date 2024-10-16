@@ -4,7 +4,7 @@ import favicon from 'serve-favicon'
 import dotenv from 'dotenv'
 
 // import the router from your routes file
-
+import router from './routes/boltBucket.js';
 
 dotenv.config()
 
