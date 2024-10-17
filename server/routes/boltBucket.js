@@ -14,14 +14,12 @@ router.get('/', carController.getCarsList);
 router.post('/', carController.addCar);
 
 // Get a specific car by ID (you can modify this if you want to return details or serve a static page)
-router.get('/:carId', (req, res) => {
-    res.status(200).sendFile(path.resolve(__dirname, '../public/index.html'));
-});
+router.get('/cars/:id', carController.getCarById);
 
 // Edit a specific car by ID
-router.put('/:carId', carController.editCar);
+router.put('/cars/:id', carController.editCar);
 
 // Delete a specific car by ID
-router.delete('/:carId', carController.deleteCar);
+router.delete('/:id', carController.deleteCar);
 
 export default router;

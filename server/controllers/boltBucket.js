@@ -10,6 +10,20 @@ const getCarsList = async (req, res) => {
     }
 };
 
+// Get list a car
+const getCarById = async (req, res) => {
+    const { id } = req.params;
+    try {
+        const results = await pool.query(`SELECT * FROM cars WHERE id = $1`, [id]);
+        if (results.rowCount === 0) {
+            return res.status(404).json({ message: 'Car not found' });
+        }
+        res.status(200).json(results.rows[0]);
+    } catch (error) {
+        res.status(409).json({ error: error.message });
+    }
+};
+
 // Create a new car entry
 const addCar = async (req, res) => {
     const { car_name, convertible, exterior, wheels, roof, interior, price } = req.body;
@@ -74,6 +88,7 @@ const deleteCar = async (req, res) => {
 
 export default {
     getCarsList,
+    getCarById,
     addCar,
     editCar,
     deleteCar

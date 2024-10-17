@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { getCar } from '../services/CarsAPI'; // Import the API function
 import '../App.css'
 
 const CreateCar = () => {
