@@ -35,9 +35,17 @@ The following **additional** features are implemented:
 
 Here's a walkthrough of implemented required features:
 
-<img src='http://i.imgur.com/XvtXXE5.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src='http://i.imgur.com/XZBpJpZ.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
-Youtube link in case GIF not work: https://youtu.be/SAUkeDGKlqc 
+<!-- <img src='Project 4 Demo 2.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' /> -->
+
+Youtube link in case GIF not work: https://youtu.be/2lViCVm6qQQ?si=0PzWZeJ2PpbKlHOx
+
+Database image: 
+Custom Item table: 
+<img src='customitem.png' title='Database Image' width='' alt='Database Image' />
+Cars table:
+<img src='./car table.png' title='Database Image' width='' alt='Database Image' />
 
 <!-- Replace this with whatever GIF tool you used! -->
 GIF created with ...  GIF tool here
