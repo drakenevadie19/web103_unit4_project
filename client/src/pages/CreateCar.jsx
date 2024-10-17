@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 
 const CreateCar = () => {
     const [price, setPrice] = useState(65000);
-    const [step, setStep] = useState('exterior'); // To control selection order
+    const [step, setStep] = useState(null); // To control selection order
     const [customItems, setCustomItems] = useState({
         exterior: [],
         roof: [],
@@ -22,6 +22,7 @@ const CreateCar = () => {
     
     const [carName, setCarName] = useState('');
     const [showOptions, setShowOptions] = useState(true); // Controls the visibility of options
+    const [selectAnOption, setSelectAnOption] = useState(false);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -52,14 +53,18 @@ const CreateCar = () => {
         switch (step) {
             case 'exterior':
                 setStep('roof');
+                setSelectAnOption(false);
                 break;
             case 'roof':
                 setStep('wheels');
+                setSelectAnOption(false);
                 break;
             case 'wheels':
                 setStep('interior');
+                setSelectAnOption(false);
                 break;
             case 'interior':
+                setStep('alldone');
                 setShowOptions(false); // Hide options after selecting interior
                 break;
             default:
@@ -98,6 +103,24 @@ const CreateCar = () => {
                 </label>
             </div>
 
+            <div className="button-group">
+                {/* Buttons for each type of customization */}
+                <button 
+                    id="car-options" 
+                    onClick={() => step === null && setStep('exterior')} 
+                    className={step === 'exterior' ? "onSelection" : ""}
+                >
+                    EXTERIOR
+                </button>
+                <button id="car-options" 
+                    className={step === 'roof' ? "onSelection" : ""}>ROOF</button>
+                <button id="car-options" 
+                    className={step === 'wheels' ? "onSelection" : ""}>WHEELS</button>
+                <button id="car-options" 
+                    className={step === 'interior' ? "onSelection" : ""}>INTERIOR</button>
+            </div>
+
+
             {/* Always display the car name input and create button */}
             <div className="input-carname-and-submit-button">
                 <input 
@@ -110,70 +133,82 @@ const CreateCar = () => {
                 <button onClick={handleSubmit}>Create</button>
             </div>
 
-            <div className="button-group">
-                {/* Buttons for each type of customization */}
-                <button id="car-options" onClick={() => setStep('exterior')}>EXTERIOR</button>
-                <button id="car-options" onClick={() => setStep('roof')}>ROOF</button>
-                <button id="car-options" onClick={() => setStep('wheels')}>WHEELS</button>
-                <button id="car-options" onClick={() => setStep('interior')}>INTERIOR</button>
-            </div>
-
-            {/* Display customization options based on the current step */}
             {showOptions && step === 'exterior' && (
-                <div>
-                    <h4>Select Exterior:</h4>
-                    <div className="custom-item-list">
-                        {customItems.exterior.map(item => (
-                            <div key={item.id} onClick={() => handleSelection('exterior', item)}>
-                                {item.name} - ${item.price}
+                <div className='option-modal'>
+                    {/* Display customization options based on the current step */}
+                        <div>
+                            <div className="available-options">
+                                {/* <h4>Select Exterior:</h4> */}
+                                {customItems.exterior.map(item => (
+                                    <div className='option-card'>
+                                        <div key={item.id} onClick={() => handleSelection('exterior', item)} className='option-card-overlay'>
+                                            {item.name} - ${item.price}
+                                        </div>
+                                    </div>
+                                ))}
                             </div>
-                        ))}
-                    </div>
-                    <button onClick={handleNextStep}>Done</button>
+                            <button onClick={handleNextStep}>Done</button>
+                        </div>
                 </div>
             )}
 
             {showOptions && step === 'roof' && (
-                <div>
-                    <h4>Select Roof:</h4>
-                    <div className="custom-item-list">
-                        {customItems.roof.map(item => (
-                            <div key={item.id} onClick={() => handleSelection('roof', item)}>
-                                {item.name} - ${item.price}
+                <div className='option-modal'>
+                        <div>
+                            <div className="available-options">
+                                {/* <h4>Select Roof:</h4> */}
+                                {customItems.roof.map(item => (
+                                    <div className='option-card'>
+                                        <div key={item.id} onClick={() => handleSelection('roof', item)} className='option-card-overlay'>
+                                            {item.name} - ${item.price}
+                                        </div>
+                                    </div>
+                                    
+                                ))}
                             </div>
-                        ))}
-                    </div>
-                    <button onClick={handleNextStep}>Done</button>
+                            <button onClick={handleNextStep}>Done</button>
+                        </div>
                 </div>
             )}
+
 
             {showOptions && step === 'wheels' && (
-                <div>
-                    <h4>Select Wheels:</h4>
-                    <div className="custom-item-list">
-                        {customItems.wheels.map(item => (
-                            <div key={item.id} onClick={() => handleSelection('wheels', item)}>
-                                {item.name} - ${item.price}
+                <div className='option-modal'>
+                        <div>
+                            <div className="available-options">
+                                {/* <h4>Select Wheels:</h4> */}
+                                {customItems.wheels.map(item => (
+                                    <div className='option-card'>
+                                        <div key={item.id} onClick={() => handleSelection('wheels', item)} className='option-card-overlay'>
+                                            {item.name} - ${item.price}
+                                        </div>
+                                    </div>
+                                ))}
                             </div>
-                        ))}
-                    </div>
-                    <button onClick={handleNextStep}>Done</button>
+                            <button onClick={handleNextStep}>Done</button>
+                        </div>
                 </div>
             )}
 
+
             {showOptions && step === 'interior' && (
-                <div>
-                    <h4>Select Interior:</h4>
-                    <div className="custom-item-list">
-                        {customItems.interior.map(item => (
-                            <div key={item.id} onClick={() => handleSelection('interior', item)}>
-                                {item.name} - ${item.price}
+                <div className='option-modal'>
+                        <div>
+                            <div className="available-options">
+                                {/* <h4>Select Interior:</h4> */}
+                                {customItems.interior.map(item => (
+                                    <div className='option-card'>
+                                        <div key={item.id} onClick={() => handleSelection('interior', item)} className='option-card-overlay'>
+                                            {item.name} - ${item.price}
+                                        </div>
+                                    </div>
+                                ))}
                             </div>
-                        ))}
-                    </div>
-                    <button onClick={handleNextStep}>Done</button>
+                            <button onClick={handleNextStep}>Done</button>
+                        </div>
                 </div>
             )}
+            
 
             {/* Display total price at the bottom */}
             <div className="create-car-price">
