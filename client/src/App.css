@@ -10,3 +10,62 @@
     overflow-x: hidden;
     padding-bottom: 50px;
 }
+
+.create-car-bar {
+    display: flex;
+    flex-direction: row;
+    padding: 5px 50px 30px;
+    background-color: rgba(0, 0, 0, 0.8);
+    width: 100vw;
+}
+
+.convertible {
+    width: 15%;
+    display: flex;
+    /* justify-content: center; */
+    align-items: center;
+}
+
+.button-group {
+    width: 70%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+#car-name {
+    width: 100%;
+    height: 40px;
+    font-size: 0.75em;
+}
+
+.input-carname {
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.input-carname-and-submit-button {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.create-car-price {
+    position: absolute;
+    top: 80vh;
+    left: 50px;
+    width: 300px;
+    height: 80px;
+    background-color: var(--primary);
+    border: 3px solid black;
+    border-radius: 5px;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 700;
+    font-size: 2em;
+}

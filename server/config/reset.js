@@ -1,21 +1,20 @@
 import { pool } from './database.js';
 import './dotenv.js';
-import teamList from '../data/teams.js';
+import carCustomizations from '../data/carCustomizations.js';
 
-const createBoltBucketTable = async () => {
+const createCarsTable = async () => {
     const createTableQuery = `
-        DROP TABLE IF EXISTS boltBucket;
+        DROP TABLE IF EXISTS cars;
 
-        CREATE TABLE IF NOT EXISTS boltBucket (
+        CREATE TABLE IF NOT EXISTS cars (
             id SERIAL PRIMARY KEY,
-            team_name VARCHAR(255) NOT NULL,
-            year_of_foundation INTEGER NOT NULL,
-            country VARCHAR(255) NOT NULL,
-            stadium VARCHAR(255) NOT NULL,
-            stadium_capacity INTEGER NOT NULL,
-            city VARCHAR(255) NOT NULL,
-            manager VARCHAR(255) NOT NULL,
-            logo VARCHAR(255) NOT NULL
+            car_name VARCHAR(255) NOT NULL,
+            convertible BOOLEAN NOT NULL,
+            exterior VARCHAR(255) NOT NULL,
+            wheels VARCHAR(255) NOT NULL,
+            roof VARCHAR(255) NOT NULL,
+            interior VARCHAR(255) NOT NULL,
+            price INTEGER NOT NULL
         )
     `;
 
@@ -27,21 +26,38 @@ const createBoltBucketTable = async () => {
     }
 }
 
-const sendTeamsTable = async () => {
-    await createTeamsTable();
+const createCustomItemTable = async () => {
+    const createTableQuery = `
+        DROP TABLE IF EXISTS CustomItem;
 
-    teamList.forEach((team) => {
+        CREATE TABLE IF NOT EXISTS CustomItem (
+            id SERIAL PRIMARY KEY,
+            type VARCHAR(255) NOT NULL,
+            name VARCHAR(255) NOT NULL,
+            price INTEGER NOT NULL
+        )
+    `;
+
+    try {
+        const res = await pool.query(createTableQuery);
+        console.log('🎉 teams table created successfully');
+    } catch (err) {
+        console.error('⚠️ error creating teams table', err);
+    }
+}
+
+
+const addDataToCustomItemTable = async () => {
+    await createCustomItemTable();
+
+    carCustomizations.forEach((car, index) => {
         const insertQuery = {
-            text: 'INSERT INTO teams (team_name, year_of_foundation, country, stadium, stadium_capacity, city, manager, logo) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)',
+            text: 'INSERT INTO CustomItem (id, type, name, price) VALUES ($1, $2, $3, $4)',
             values: [
-                team.team_name,
-                team.year_of_foundation,
-                team.country,
-                team.stadium,
-                team.stadium_capacity,
-                team.city,
-                team.manager,
-                team.logo
+                index,
+                car.type,
+                car.name,
+                car.price
             ]
         };
 
@@ -50,9 +66,10 @@ const sendTeamsTable = async () => {
                 console.error('⚠️ error inserting team', err);
                 return;
             }
-            console.log(`✅ ${team.team_name} added successfully`);
+            console.log(`✅ ${car.name} added successfully`);
         });
     });
 }
 
-sendTeamsTable();
+createCarsTable();
+addDataToCustomItemTable();
