@@ -22,4 +22,7 @@ router.put('/cars/:id', carController.editCar);
 // Delete a specific car by ID
 router.delete('/cars/:id', carController.deleteCar);
 
+// Get all customs
+router.get('/customsList', carController.getAllCustoms);
+
 export default router;

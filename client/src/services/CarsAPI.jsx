@@ -88,3 +88,18 @@ export const deleteCar = async (carId) => {
     throw error;
   }
 };
+
+// Get all customs 
+export const getAllCustomItems = async () => {
+    try {
+        const response = await fetch(`${API_BASE_URL}/customsList`);
+        if (!response.ok) {
+          throw new Error(`Error fetching cars: ${response.statusText}`);
+        }
+        const data = await response.json();
+        return data;
+      } catch (error) {
+        console.error("Error fetching cars:", error);
+        throw error;
+      }
+}
