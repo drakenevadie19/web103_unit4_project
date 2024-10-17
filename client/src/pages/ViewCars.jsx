@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom'; // For navigation to the details page
 import { getAllCars } from '../services/CarsAPI'; // Import the API function
 import '../App.css';
+import { useNavigate } from 'react-router-dom';
 
 const ViewCars = () => {
     const [cars, setCars] = useState([]); // State to store the list of cars
     const [loading, setLoading] = useState(true); // Loading state
     const [error, setError] = useState(null); // Error state
+    const navigate = useNavigate();
 
     useEffect(() => {
         // Fetch all cars when the component mounts
@@ -47,9 +48,9 @@ const ViewCars = () => {
                             <p><strong>Interior:</strong> {car.interior}</p>
                             
                             {/* Button to navigate to the car details page */}
-                            <Link to={`/customcars/${car.id}`} className="details-button">
+                            <button onClick={() => navigate(`/customcars/${car.id}`)} className="details-button">
                                 Details
-                            </Link>
+                            </button>
                         </div>
                     ))}
                 </div>
