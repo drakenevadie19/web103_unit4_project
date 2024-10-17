@@ -1,6 +1,7 @@
 import { pool } from './database.js';
 import './dotenv.js';
 import carCustomizations from '../data/carCustomizations.js';
+import initialCars from '../data/car.js';
 
 const createCarsTable = async () => {
     const createTableQuery = `
@@ -20,7 +21,7 @@ const createCarsTable = async () => {
 
     try {
         const res = await pool.query(createTableQuery);
-        console.log('🎉 teams table created successfully');
+        console.log('🎉 cars table created successfully');
     } catch (err) {
         console.error('⚠️ error creating teams table', err);
     }
@@ -40,11 +41,42 @@ const createCustomItemTable = async () => {
 
     try {
         const res = await pool.query(createTableQuery);
-        console.log('🎉 teams table created successfully');
+        console.log('🎉 CustomItem table created successfully');
     } catch (err) {
         console.error('⚠️ error creating teams table', err);
     }
 }
+
+const addInitialCartoCarsTable = async () => {
+    await createCarsTable(); // Ensure the cars table is created before inserting data
+
+    initialCars.forEach((car) => {
+        const insertQuery = {
+            text: `
+                INSERT INTO cars (id, car_name, convertible, exterior, wheels, roof, interior, price) 
+                VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
+            `,
+            values: [
+                car.id,
+                car.car_name,
+                car.convertible,
+                car.exterior,
+                car.wheels,
+                car.roof,
+                car.interior,
+                car.price
+            ]
+        };
+
+        pool.query(insertQuery, (err, res) => {
+            if (err) {
+                console.error(`⚠️ Error inserting ${car.car_name}:`, err);
+                return;
+            }
+            console.log(`✅ ${car.car_name} added successfully`);
+        });
+    });
+};
 
 
 const addDataToCustomItemTable = async () => {
@@ -71,5 +103,5 @@ const addDataToCustomItemTable = async () => {
     });
 }
 
-createCarsTable();
+addInitialCartoCarsTable();
 addDataToCustomItemTable();
