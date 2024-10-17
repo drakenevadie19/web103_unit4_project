@@ -26,16 +26,16 @@ const getCarById = async (req, res) => {
 
 // Create a new car entry
 const addCar = async (req, res) => {
-    const { car_name, convertible, exterior, wheels, roof, interior, price } = req.body;
+    const { id, car_name, convertible, exterior, wheels, roof, interior, price } = req.body;
 
     const insertQuery = `
-        INSERT INTO cars (car_name, convertible, exterior, wheels, roof, interior, price)
-        VALUES ($1, $2, $3, $4, $5, $6, $7)
+        INSERT INTO cars (id, car_name, convertible, exterior, wheels, roof, interior, price)
+        VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
         RETURNING *;
     `;
 
     try {
-        const results = await pool.query(insertQuery, [car_name, convertible, exterior, wheels, roof, interior, price]);
+        const results = await pool.query(insertQuery, [id, car_name, convertible, exterior, wheels, roof, interior, price]);
         res.status(201).json(results.rows[0]);
     } catch (error) {
         res.status(409).json({ error: error.message });

@@ -128,3 +128,7 @@
     opacity: 0.5;
     cursor: not-allowed;
 }
+
+.selected-option {
+    border: 2px solid green;
+}
