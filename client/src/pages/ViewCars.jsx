@@ -14,6 +14,7 @@ const ViewCars = () => {
             try {
                 const carList = await getAllCars();
                 setCars(carList);
+                console.log(carList);
             } catch (err) {
                 setError(err.message);
             } finally {
@@ -33,18 +34,9 @@ const ViewCars = () => {
 
     return (
         <div>
-            <div>
-                <header>
-                    <h3>
-                        <img src="/assets/convertible-d1e22bba.png" alt="Convertible Icon" />  
-                        Tacos
-                    </h3>
-                </header>
-            </div>
-
             <div className="cars-list-container">
                 <div className="cars-grid">
-                    {cars.map(car => (
+                    {cars.map((car) => (
                         <div className="car-card" key={car.id}>
                             <h2>{car.car_name}</h2>
                             <p><strong>Price:</strong> ${car.price}</p>

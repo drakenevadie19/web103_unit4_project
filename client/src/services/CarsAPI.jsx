@@ -1,10 +1,10 @@
 // Define functions to call API to getAllCars, getCar, createCar, editCar, deleteCar
-const API_BASE_URL = "http://localhost:5000/api"; // Updated base URL with /api prefix
+const API_BASE_URL = "http://localhost:3000"; // Updated base URL with /api prefix
 
 // Get all cars
 export const getAllCars = async () => {
   try {
-    const response = await fetch(`${API_BASE_URL}/`);
+    const response = await fetch(`${API_BASE_URL}`);
     if (!response.ok) {
       throw new Error(`Error fetching cars: ${response.statusText}`);
     }
@@ -19,7 +19,7 @@ export const getAllCars = async () => {
 // Get a specific car by ID
 export const getCar = async (carId) => {
   try {
-    const response = await fetch(`${API_BASE_URL}/${carId}`);
+    const response = await fetch(`${API_BASE_URL}/cars/${carId}`);
     if (!response.ok) {
       throw new Error(`Error fetching car ${carId}: ${response.statusText}`);
     }
@@ -34,7 +34,7 @@ export const getCar = async (carId) => {
 // Add a new car
 export const addCar = async (carData) => {
   try {
-    const response = await fetch(`${API_BASE_URL}/`, {
+    const response = await fetch(`${API_BASE_URL}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -55,7 +55,7 @@ export const addCar = async (carData) => {
 // Update car details by ID
 export const updateCar = async (carId, updatedCarData) => {
   try {
-    const response = await fetch(`${API_BASE_URL}/${carId}`, {
+    const response = await fetch(`${API_BASE_URL}/cars/${carId}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -76,7 +76,7 @@ export const updateCar = async (carId, updatedCarData) => {
 // Delete car by ID
 export const deleteCar = async (carId) => {
   try {
-    const response = await fetch(`${API_BASE_URL}/${carId}`, {
+    const response = await fetch(`${API_BASE_URL}/cars/${carId}`, {
       method: "DELETE",
     });
     if (!response.ok) {

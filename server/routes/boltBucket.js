@@ -20,6 +20,6 @@ router.get('/cars/:id', carController.getCarById);
 router.put('/cars/:id', carController.editCar);
 
 // Delete a specific car by ID
-router.delete('/:id', carController.deleteCar);
+router.delete('/cars/:id', carController.deleteCar);
 
 export default router;

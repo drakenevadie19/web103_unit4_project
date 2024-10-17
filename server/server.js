@@ -6,11 +6,14 @@ import dotenv from 'dotenv'
 // import the router from your routes file
 import router from './routes/boltBucket.js';
 
+import cors from 'cors';
+
 dotenv.config()
 
 const PORT = process.env.PORT || 3000
 
 const app = express()
+app.use(cors());
 
 app.use(express.json())
 

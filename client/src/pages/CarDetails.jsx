@@ -4,7 +4,7 @@ import { getCar } from '../services/CarsAPI'; // Import the API function
 import '../App.css';
 
 const CarDetails = () => {
-    const { carId } = useParams(); // Get carId from the route params
+    const { id } = useParams(); // Get carId from the route params
     const [car, setCar] = useState(null); // State to hold car details
     const [loading, setLoading] = useState(true); // Loading state
     const [error, setError] = useState(null); // Error state
@@ -13,7 +13,7 @@ const CarDetails = () => {
         // Fetch car details when the component mounts
         const fetchCarDetails = async () => {
             try {
-                const carData = await getCar(carId);
+                const carData = await getCar(id);
                 setCar(carData);
             } catch (err) {
                 setError(err.message);
@@ -22,7 +22,7 @@ const CarDetails = () => {
             }
         };
         fetchCarDetails();
-    }, [carId]); // Re-fetch car data when carId changes
+    }, [id]); // Re-fetch car data when carId changes
 
     if (loading) {
         return <div>Loading...</div>; // Loading state
