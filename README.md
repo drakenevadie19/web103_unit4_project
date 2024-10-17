@@ -16,8 +16,8 @@ The following **required** functionality is completed:
 - [x] **The web app uses React to display data from the API**
 - [x] **Users can view a list of options they can select for different aspects of a `CustomCar`**
 - [x] **On selecting each option, the displayed visual icon for the `CustomCar` updates to match the option the user chose**
-- [ ] **The user can submit their choices to save the car to the list of created `CustomCar`**
-- [ ] **If a user submits a feature combo that is impossible, they should receive an appropriate error message and the item should not be saved to the database**
+- [x] **The user can submit their choices to save the car to the list of created `CustomCar`**
+- [x] **If a user submits a feature combo that is impossible, they should receive an appropriate error message and the item should not be saved to the database**
 - [x] **The app displays the total price of all features**
 - [x] **Users can view a list of all submitted `CustomCar`**
 - [x] **Users can edit or delete a submitted `CustomCar` from the list view of submitted `CustomCar`**
@@ -25,11 +25,11 @@ The following **required** functionality is completed:
 
 The following **optional** features are implemented:
 
-- [ ] Selecting particular options prevents incompatible options from being selected even before form submission
+- [x] Selecting particular options prevents incompatible options from being selected even before form submission
 
 The following **additional** features are implemented:
 
-- [ ] List anything else that you added to improve the site's functionality!
+- [x] List anything else that you added to improve the site's functionality!
 
 ## Video Walkthrough
 
@@ -52,7 +52,7 @@ Describe any challenges encountered while building the app or any additional con
 
 ## License
 
-Copyright [2024] [name of copyright owner]
+Copyright [2024] [Thanh Nguyen Do]
 
 Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at
 

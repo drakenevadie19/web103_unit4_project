@@ -49,11 +49,11 @@ const CreateCar = () => {
         setSelectedItems(prev => {
             const previousItem = prev[type];
             const updatedPrice = previousItem 
-                ? price - previousItem.price + item.price 
+                ? price - customItems[type].find(i => i.name === previousItem).price + item.price 
                 : price + item.price;
             setPrice(updatedPrice);
 
-            return { ...prev, [type]: item };
+            return { ...prev, [type]: item.name }; // Save only the name
         });
     };
 
@@ -103,10 +103,10 @@ const CreateCar = () => {
             id: id,
             car_name: carName,
             convertible: isConvertible,
-            exterior: selectedItems.exterior,
-            wheels: selectedItems.wheels,
-            roof: selectedItems.roof,
-            interior: selectedItems.interior,
+            exterior: selectedItems.exterior,  // Only the name of the selected item
+            wheels: selectedItems.wheels,      // Only the name of the selected item
+            roof: selectedItems.roof,          // Only the name of the selected item
+            interior: selectedItems.interior,  // Only the name of the selected item
             price: price
         };
 
@@ -171,7 +171,7 @@ const CreateCar = () => {
                                 <div 
                                     key={item.id} 
                                     onClick={() => handleSelection('exterior', item)} 
-                                    className={`option-card ${selectedItems.exterior && selectedItems.exterior.id === item.id ? 'selected-option' : ''}`}
+                                    className={`option-card ${selectedItems.exterior === item.name ? 'selected-option' : ''}`}
                                 >
                                     <div className='option-card-overlay'>
                                         {item.name} - ${item.price}
@@ -192,7 +192,7 @@ const CreateCar = () => {
                                 <div 
                                     key={item.id} 
                                     onClick={() => handleSelection('roof', item)} 
-                                    className={`option-card ${selectedItems.roof && selectedItems.roof.id === item.id ? 'selected-option' : ''}`}
+                                    className={`option-card ${selectedItems.roof === item.name ? 'selected-option' : ''}`}
                                 >
                                     <div className='option-card-overlay'>
                                         {item.name} - ${item.price}
@@ -213,7 +213,7 @@ const CreateCar = () => {
                                 <div 
                                     key={item.id} 
                                     onClick={() => handleSelection('wheels', item)} 
-                                    className={`option-card ${selectedItems.wheels && selectedItems.wheels.id === item.id ? 'selected-option' : ''}`}
+                                    className={`option-card ${selectedItems.wheels === item.name ? 'selected-option' : ''}`}
                                 >
                                     <div className='option-card-overlay'>
                                         {item.name} - ${item.price}
@@ -234,7 +234,7 @@ const CreateCar = () => {
                                 <div 
                                     key={item.id} 
                                     onClick={() => handleSelection('interior', item)} 
-                                    className={`option-card ${selectedItems.interior && selectedItems.interior.id === item.id ? 'selected-option' : ''}`}
+                                    className={`option-card ${selectedItems.interior === item.name ? 'selected-option' : ''}`}
                                 >
                                     <div className='option-card-overlay'>
                                         {item.name} - ${item.price}
